@@ -5,14 +5,18 @@ const ws = new WebSocket('ws://localhost:8080');
 //GPIO Bibliothek laden
 const Gpio = require('onoff').Gpio;
 
+//Button Config laden
+const fs = require('fs-extra');
+const config = fs.readJsonSync(__dirname + '/config.json');
+
 //Previous-Button
-const buttonPrevious = new Gpio(160, 'in', 'rising', { debounceTimeout: 10 });
+const buttonPrevious = new Gpio(config.buttonPrevious, 'in', 'rising', { debounceTimeout: 10 });
 
 //Pause-Button
-const buttonPause = new Gpio(253, 'in', 'rising', { debounceTimeout: 10 });
+const buttonPause = new Gpio(config.buttonPause, 'in', 'rising', { debounceTimeout: 10 });
 
 //Next-Button
-const buttonNext = new Gpio(252, 'in', 'rising', { debounceTimeout: 10 });
+const buttonNext = new Gpio(config.buttonNext, 'in', 'rising', { debounceTimeout: 10 });
 
 //Wenn Verbindung mit WSS hergestellt wird
 ws.on('open', function open() {
