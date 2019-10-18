@@ -39,7 +39,7 @@ ws.on('open', function open() {
 
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
-            type: "toggle-paused-restart",
+            type: "toggle-paused",
             value: ""
         }));
     });
