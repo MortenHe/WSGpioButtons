@@ -1,6 +1,9 @@
+//Port 8080 (audio player) oder 9090 (sh audio player)
+const port = process.argv[2] || 8080;
+
 //Mit WebsocketServer verbinden
 const WebSocket = require('ws');
-const ws = new WebSocket('ws://localhost:8080');
+const ws = new WebSocket('ws://localhost:' + port);
 
 //GPIO Bibliothek laden
 const Gpio = require('onoff').Gpio;
@@ -29,7 +32,7 @@ ws.on('open', function open() {
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
             type: "change-item",
-            value: false
+            value: -1
         }));
     });
 
@@ -51,7 +54,7 @@ ws.on('open', function open() {
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
             type: "change-item",
-            value: true
+            value: 1
         }));
     });
 });
