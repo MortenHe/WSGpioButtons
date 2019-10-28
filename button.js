@@ -10,51 +10,57 @@ const Gpio = require('onoff').Gpio;
 
 //Button Config laden
 const fs = require('fs-extra');
-const config = fs.readJsonSync(__dirname + '/config.json');
+const config = fs.readJsonSync(__dirname + '/config_' + port + '.json');
 
-//Previous-Button
-const buttonPrevious = new Gpio(config.buttonPrevious, 'in', 'rising', { debounceTimeout: 10 });
+//Button 1
+const button1 = new Gpio(config.button1.pin, 'in', 'rising', { debounceTimeout: 10 });
 
-//Pause-Button
-const buttonPause = new Gpio(config.buttonPause, 'in', 'rising', { debounceTimeout: 10 });
+//Button 2
+const button2 = new Gpio(config.button2.pin, 'in', 'rising', { debounceTimeout: 10 });
 
-//Next-Button
-const buttonNext = new Gpio(config.buttonNext, 'in', 'rising', { debounceTimeout: 10 });
+//Button 3
+const button3 = new Gpio(config.button3.pin, 'in', 'rising', { debounceTimeout: 10 });
 
 //Wenn Verbindung mit WSS hergestellt wird
 ws.on('open', function open() {
     console.log("connected to wss");
 
     //Wenn Button gedrueckt wird -> vorherigen Titel abspielen
-    buttonPrevious.watch(function (err, value) {
-        console.log("previous track");
+    button1.watch(function (err, value) {
+        console.log(config.button1.type);
+
+        let sendValue = port != "7070" ? config.button1.value : JSON.stringify(config.button1.value)
 
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
-            type: "change-item",
-            value: -1
+            type: config.button1.type,
+            value: sendValue
         }));
     });
 
     //Wenn Button gedrueckt wird -> Pause / Unpuase
-    buttonPause.watch(function (err, value) {
-        console.log("toggle paused");
+    button2.watch(function (err, value) {
+        console.log(config.button2.type);
+
+        let sendValue = port != "7070" ? config.button2.value : JSON.stringify(config.button2.value)
 
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
-            type: "toggle-paused",
-            value: ""
+            type: config.button2.type,
+            value: sendValue
         }));
     });
 
     //Wenn Button gedrueckt wurd -> naechsten Titel abspielen
-    buttonNext.watch(function (err, value) {
-        console.log("next track");
+    button3.watch(function (err, value) {
+        console.log(config.button3.type);
+
+        let sendValue = port != "7070" ? config.button3.value : JSON.stringify(config.button3.value)
 
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
-            type: "change-item",
-            value: 1
+            type: config.button3.type,
+            value: sendValue
         }));
     });
 });

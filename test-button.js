@@ -1,20 +1,23 @@
-const button1 = 14;
-const button1 = 15;
-const button1 = 18;
-
+const fs = require("fs-extra");
 const Gpio = require('onoff').Gpio;
-const buttonPrevious = new Gpio(button1, 'in', 'rising', { debounceTimeout: 10 });
-const buttonPause = new Gpio(button2, 'in', 'rising', { debounceTimeout: 10 });
-const buttonNext = new Gpio(button3, 'in', 'rising', { debounceTimeout: 10 });
+const configButtons = fs.readJsonSync(__dirname + '/config_8080.json');
 
-buttonPrevious.watch(function (err, value) {
-    console.log("previous track");
-});
+buttons = [];
 
-buttonPause.watch(function (err, value) {
-    console.log("toggle paused");
-});
+let counter = 0;
+for (configButton of configButtons) {
+    console.log(configButton);
 
-buttonNext.watch(function (err, value) {
-    console.log("next track");
-});
+    buttons[counter] = new Gpio(configButton.pin, 'in', 'rising', { debounceTimeout: 10 });
+
+    //Wenn Button gedrueckt wird -> Fkt ausfuehren
+    buttons[counter].watch(function (err, value) {
+        console.log(this);
+        //console.log(configButtons[counter].type)
+        //console.log(configButtons[counter].pin)
+    });
+
+    counter++;
+}
+
+console.log(buttons);

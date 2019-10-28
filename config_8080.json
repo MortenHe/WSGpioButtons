@@ -1,0 +1,17 @@
+{
+    "button1": {
+        "pin": 5,
+        "type": "change-item",
+        "value": -1
+    },
+    "button2": {
+        "pin": 7,
+        "type": "toggle-paused",
+        "value": ""
+    },
+    "button3": {
+        "pin": 15,
+        "type": "change-item",
+        "value": 1
+    }
+}

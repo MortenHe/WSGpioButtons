@@ -1,0 +1,26 @@
+{
+    "button1": {
+        "pin": 5,
+        "type": "send-card-data",
+        "value": {
+            "type": "joker",
+            "value": null
+        }
+    },
+    "button2": {
+        "pin": 7,
+        "type": "send-card-data",
+        "value": {
+            "type": "repeat",
+            "value": null
+        }
+    },
+    "button3": {
+        "pin": 15,
+        "type": "send-card-data",
+        "value": {
+            "type": "joker",
+            "value": null
+        }
+    }
+}
