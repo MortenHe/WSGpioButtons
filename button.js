@@ -29,12 +29,10 @@ ws.on('open', function open() {
     button1.watch(function (err, value) {
         console.log(config.button1.type);
 
-        let sendValue = port != "7070" ? config.button1.value : JSON.stringify(config.button1.value)
-
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
             type: config.button1.type,
-            value: sendValue
+            value: config.button1.value
         }));
     });
 
@@ -42,12 +40,10 @@ ws.on('open', function open() {
     button2.watch(function (err, value) {
         console.log(config.button2.type);
 
-        let sendValue = port != "7070" ? config.button2.value : JSON.stringify(config.button2.value)
-
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
             type: config.button2.type,
-            value: sendValue
+            value: config.button2.value
         }));
     });
 
@@ -55,12 +51,10 @@ ws.on('open', function open() {
     button3.watch(function (err, value) {
         console.log(config.button3.type);
 
-        let sendValue = port != "7070" ? config.button3.value : JSON.stringify(config.button3.value)
-
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
             type: config.button3.type,
-            value: sendValue
+            value: config.button3.value
         }));
     });
 });

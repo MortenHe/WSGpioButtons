@@ -3,7 +3,7 @@
         "pin": 5,
         "type": "send-card-data",
         "value": {
-            "type": "joker",
+            "type": "jingle",
             "value": null
         }
     },
