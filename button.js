@@ -13,13 +13,13 @@ const fs = require('fs-extra');
 const config = fs.readJsonSync(__dirname + '/config_' + port + '.json');
 
 //Button 1
-const button1 = new Gpio(config.button1.pin, 'in', 'rising', { debounceTimeout: 10 });
+const button1 = new Gpio(config.button1.pin, 'in', 'falling', { debounceTimeout: 100 });
 
 //Button 2
-const button2 = new Gpio(config.button2.pin, 'in', 'rising', { debounceTimeout: 10 });
+const button2 = new Gpio(config.button2.pin, 'in', 'falling', { debounceTimeout: 100 });
 
 //Button 3
-const button3 = new Gpio(config.button3.pin, 'in', 'rising', { debounceTimeout: 10 });
+const button3 = new Gpio(config.button3.pin, 'in', 'falling', { debounceTimeout: 100 });
 
 //Wenn Verbindung mit WSS hergestellt wird
 ws.on('open', function open() {
