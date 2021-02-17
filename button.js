@@ -5,6 +5,9 @@ const port = process.argv[2] || 8080;
 const WebSocket = require('ws');
 const ws = new WebSocket('ws://localhost:' + port);
 
+//Beep-Ton bei Buttons
+const singleSoundPlayer = require('play-sound')(opts = {});
+
 //GPIO Bibliothek laden
 const Gpio = require('onoff').Gpio;
 
@@ -50,6 +53,12 @@ ws.on('open', function open() {
     //Wenn Button gedrueckt wurd -> naechsten Titel abspielen
     button3.watch(function (err, value) {
         console.log(config.button3.type);
+
+        //Beep abspielen bei Button press
+        singleSoundPlayer.play('beep.wav', function (err) {
+            console.log("Play sound" + err)
+            if (err) throw err
+        });
 
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
