@@ -54,11 +54,8 @@ ws.on('open', function open() {
     button3.watch(function (err, value) {
         console.log(config.button3.type);
 
-        //Beep abspielen bei Button press
-        singleSoundPlayer.play('beep.wav', function (err) {
-            console.log("Play sound" + err)
-            if (err) throw err
-        });
+        //Beep abspielen
+        playSound('button-11.wav');
 
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
@@ -67,3 +64,9 @@ ws.on('open', function open() {
         }));
     });
 });
+
+//Einzelsound abspielen
+function playSound(sound) {
+    const playedSound = sound ?? "beep.wav";
+    singleSoundPlayer.play(__dirname + "/" + playedSound);
+}
