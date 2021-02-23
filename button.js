@@ -1,5 +1,5 @@
 //Port 8080 (audio player) oder 9090 (sh audio player)
-const port = process.argv[2] || 8080;
+const port = process.argv[2];
 
 //Mit WebsocketServer verbinden
 const WebSocket = require('ws');
