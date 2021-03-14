@@ -25,8 +25,11 @@ ws.on('open', function open() {
     console.log("connected to wss");
 
     //Wenn Button gedrueckt wird -> vorherigen Titel abspielen
-    button1.watch(function (err, value) {
+    button1.watch(function () {
         console.log(config.button1.type);
+
+        //Beep abspielen
+        playSound();
 
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
@@ -36,8 +39,11 @@ ws.on('open', function open() {
     });
 
     //Wenn Button gedrueckt wird -> Pause / Unpuase
-    button2.watch(function (err, value) {
+    button2.watch(function () {
         console.log(config.button2.type);
+
+        //Beep abspielen
+        playSound();
 
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
@@ -47,7 +53,7 @@ ws.on('open', function open() {
     });
 
     //Wenn Button gedrueckt wurd -> naechsten Titel abspielen
-    button3.watch(function (err, value) {
+    button3.watch(function () {
         console.log(config.button3.type);
 
         //Beep abspielen
