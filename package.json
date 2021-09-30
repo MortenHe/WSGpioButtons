@@ -9,10 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "fs-extra": "^9.0.1",
+    "fs-extra": "^10.0.0",
     "node-wav-player": "^0.2.0",
-    "onoff": "^6.0.1",
-    "ws": "^7.4.2"
+    "onoff": "^6.0.3",
+    "ws": "^8.2.2"
   },
   "repository": {
     "type": "git",
