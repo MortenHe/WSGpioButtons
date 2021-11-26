@@ -29,7 +29,7 @@ ws.on('open', function open() {
         console.log(config.button1.type);
 
         //Beep abspielen
-        playSound();
+        //playSound();
 
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
