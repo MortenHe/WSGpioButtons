@@ -5,9 +5,6 @@ const port = process.argv[2];
 const WebSocket = require('ws');
 const ws = new WebSocket('ws://localhost:' + port);
 
-//Beep-Ton bei Button
-const singleSoundPlayer = require('node-wav-player');
-
 //GPIO Bibliothek laden
 const Gpio = require('onoff').Gpio;
 
@@ -24,12 +21,9 @@ const button3 = new Gpio(config.button3.pin, 'in', 'falling', { debounceTimeout:
 ws.on('open', function open() {
     console.log("connected to wss");
 
-    //Wenn Button gedrueckt wird -> vorherigen Titel abspielen
+    //Wenn Button gedrueckt wird -> Gleichen oder vorherigen Titel abspielen (je nach Laufzeit des Titels)
     button1.watch(function () {
         console.log(config.button1.type);
-
-        //Beep abspielen
-        //playSound();
 
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
@@ -42,9 +36,6 @@ ws.on('open', function open() {
     button2.watch(function () {
         console.log(config.button2.type);
 
-        //Beep abspielen
-        playSound();
-
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
             type: config.button2.type,
@@ -56,9 +47,6 @@ ws.on('open', function open() {
     button3.watch(function () {
         console.log(config.button3.type);
 
-        //Beep abspielen
-        playSound();
-
         //Nachricht an WSS schicken
         ws.send(JSON.stringify({
             type: config.button3.type,
@@ -66,9 +54,3 @@ ws.on('open', function open() {
         }));
     });
 });
-
-//Einzelsound abspielen
-function playSound(sound) {
-    const playedSound = sound ?? "button.wav";
-    singleSoundPlayer.play({ path: __dirname + "/" + playedSound });
-}
