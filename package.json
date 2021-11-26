@@ -11,7 +11,7 @@
   "dependencies": {
     "fs-extra": "^10.0.0",
     "onoff": "^6.0.3",
-    "ws": "^8.2.2"
+    "ws": "^7.4.6"
   },
   "repository": {
     "type": "git",
